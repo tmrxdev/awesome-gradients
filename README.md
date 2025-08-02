@@ -9,8 +9,7 @@ This project is made in participation of the **Hackclub Summer 2025** event.
 ---
 
 ## Please note
-I've used AI to fix some errors with rendering certain things.
-
+I've used AI to help fix issues with rendering & downloading
 ---
 
 ## Issues
