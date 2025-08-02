@@ -4,7 +4,7 @@
 
 
 ## Hackclub Summer 2025
-This project is made in participation of the Hackclub Summer 2025 event.
+This project is made in participation of the **Hackclub Summer 2025** event.
 
 ---
 
@@ -16,7 +16,9 @@ I've used AI to fix some errors with rendering certain things.
 ## Issues
 - Html2Canvas doesn't support conic gradients, i couldn't find a way to export it.
 - Some mobile scaling issues
-Feel free to contribute by making improvements, fixing issues, etc.
+- From certain angles the Conic gradient looks low quality
+- Noise doesn't always work (disabled the noise button because of this)
+**Feel free to contribute by making improvements, fixing issues, etc.**
 
 ---
 
