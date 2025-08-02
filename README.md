@@ -13,10 +13,7 @@ I've used AI to help fix issues with rendering & downloading
 ---
 
 ## Issues
-- Html2Canvas doesn't support conic gradients, i couldn't find a way to export it.
-- Some mobile scaling issues
-- From certain angles the Conic gradient looks low quality
-- Noise doesn't always work (disabled the noise button because of this)
+- Html2Canvas doesn't support conic gradients, just screenshot it.
 **Feel free to contribute by making improvements, fixing issues, etc.**
 
 ---
