@@ -77,7 +77,7 @@
       <input type="range" id="angle" min="0" max="360" value="45" aria-label="Gradient angle" />
     </label>
     <label>Noise
-      <input disabled type="checkbox" id="noiseToggle" checked aria-label="Toggle noise overlay" />
+      <input type="checkbox" id="noiseToggle" checked aria-label="Toggle noise overlay" />
     </label>
     <button id="randomBtn" aria-label="Generate random gradient">Random</button>
     <button id="downloadBtn" aria-label="Download gradient image">Download</button>
@@ -154,23 +154,61 @@
      });
 
     downloadBtn.addEventListener('click', () => {
-      // (!) change if fixed
-      if(gradientTypeSelect.value === 'conic'){
-        alert('Conic gradients cant be downloaded right now, if you know how to fix this, contribute to the Github!');
-        return;
-      }
-      html2canvas(gradientBox).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'gradient.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      });
-    });
+  if (gradientTypeSelect.value === 'conic') {
+    alert('Conic gradients can’t be downloaded right now. If you know how to fix this, contribute to the GitHub!');
+    return;
+  }
 
-    window.addEventListener('resize', () => {
-      resize();
-      drawNoise();
-});
+  const width = gradientBox.offsetWidth;
+  const height = gradientBox.offsetHeight;
+
+  const exportCanvas = document.createElement('canvas');
+  exportCanvas.width = width;
+  exportCanvas.height = height;
+  const ctx = exportCanvas.getContext('2d');
+
+  // Create the gradient manually
+  const c1 = color1Input.value;
+  const c2 = color2Input.value;
+  const angle = parseInt(angleInput.value, 10);
+  const type = gradientTypeSelect.value;
+
+  if (type === 'linear') {
+    const radians = (angle - 90) * Math.PI / 180;
+    const x = Math.cos(radians);
+    const y = Math.sin(radians);
+    const x0 = width / 2 - x * width;
+    const y0 = height / 2 - y * height;
+    const x1 = width / 2 + x * width;
+    const y1 = height / 2 + y * height;
+    const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
+    gradient.addColorStop(0, c1);
+    gradient.addColorStop(1, c2);
+    ctx.fillStyle = gradient;
+  } else if (type === 'radial') {
+    const gradient = ctx.createRadialGradient(
+      width / 2, height / 2, 0,
+      width / 2, height / 2, Math.max(width, height) / 1.5
+    );
+    gradient.addColorStop(0, c1);
+    gradient.addColorStop(1, c2);
+    ctx.fillStyle = gradient;
+  }
+
+  ctx.fillRect(0, 0, width, height);
+
+  // Draw the noise if it's enabled
+  if (noiseToggle.checked) {
+    ctx.drawImage(noiseCanvas, 0, 0, width, height);
+  }
+
+  // Download the canvas as PNG
+  const link = document.createElement('a');
+  link.download = 'gradient.png';
+  link.href = exportCanvas.toDataURL('image/png');
+  link.click();
+  });
+
 
     resize();
     updateGradient();
