@@ -2,4 +2,4 @@
 ### Simple gradient maker, compatible to be hosted via Github Pages
 
 Participating in HackClub 2025
-(!) AI Was used to fix errors that i couldn't..
+#### (!) AI Was used to fix errors that i couldn't..
